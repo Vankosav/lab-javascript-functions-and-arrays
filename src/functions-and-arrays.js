@@ -40,7 +40,7 @@ function findLongestWord(words) {
 //should return the longest occurrence when it has multiple words
 let longestWord = '';
 for (let i = 0; i < words.length; i++) {
-    console.log(i+". word of the array:+"+ words[i]);
+   
     if (words[i].length > longestWord.length) {
       console.log("the longset word is now " + words[i]);
       longestWord = words[i];
@@ -55,7 +55,6 @@ findLongestWord([
   "aviator",
   "crocodile",
   "pearl",
-  "crocodilx",
   "orchard",
   "crackpot",
 ]);
@@ -70,15 +69,6 @@ const numbers = [6, 12, 1, 18, 13, 16, 2, 1, 8, 10];
 
 function sumNumbers(numbers) {
   let sum = 0;
-  if (numbers.length === 0) { //noticed that even without these two ifs, all prompts are being passed. how? why?
-    return 0;
-  }
-
-  if (numbers.length === numbers[0]) {
-    sum += numbers[0];
-    return sum;
-  }
-
   for (let i = 0; i < numbers.length; i++) {
     sum += numbers[i];
   }
@@ -93,31 +83,62 @@ sumNumbers([6, 12, 1, 18, 13, 16, 2, 1, 8, 10]);
 
 // should return: 57
 function sum(mixedArr) {
-   
-  let sum = 0;
-    for(let i = 0; i < mixedArr.length; i++) {
-        const currentElement = mixedArr[i];
-        console.log("Current element from the array is: " + currentElement);
-        let currentElementTransformed;
-        if (typeof currentElement === "number") {
-            console.log("Element is number, no need to transform it.");
-            currentElementTransformed = currentElement;
-            console.log(currentElement);
-        }
-        if (typeof currentElement === "string") {
-            console.log("Element is string, transforming it.");
-            currentElementTransformed = currentElement.length;
-            console.log("Transformed value is: " + currentElementTransformed);
-        }
-        if (typeof currentElement === "boolean") {
-            console.log("Element is boolean, no need to transform it actually...");
-            currentElementTransformed = currentElement;
-        }
-        sum += currentElementTransformed;
+  if (mixedArr.length === 0) {
+    return 0;
+  };
+  // should return the sum with one number array
+  if (mixedArr.length === 1) {
+    return mixedArr[0];
+  };
+  // should return zero if all elements are zero
+  if (mixedArr.every(element => element === 0)) //checkthis out =>
+  {
+    return 0;
+  };
+  // should return the sum when passed array of numbers
+  if (mixedArr.every(element => typeof element === 'number')) {
+    // we use the sumNumbers function that we created before to calculate the sum of the array
+    return sum(mixedArr);
+  };
+  // should return the sum (of the characters) when passed array of strings
+  if (numbers.every(element => typeof element === 'string')) {
+    let sum = 0;
+    for (let i = 0; i < numbers.length; i++) {
+      // we add the length of the current element to the sum on each iteration
+      sum += numbers[i].length;
     }
     return sum;
+  };
+  // should return the sum of the characters plus the sum of the numbers when passed array of mixed strings and numbers
+  if (
+    numbers.some(element => typeof element === 'string') // we check if there is at least one string in the array
+    && numbers.some(element => typeof element === 'number') // we check if there is at least one number in the array
+  ) {
+    let sum = 0; // we initialize the sum variable
+    for (let i = 0; i < numbers.length; i++) {
+      if (typeof numbers[i] === 'string') {
+        // we add the length of the current element to the sum on each iteration if it is a string
+        sum += numbers[i].length;
+      } else if (typeof numbers[i] === 'number') {
+        // we add the value of the current element to the sum on each iteration if it is a number
+        sum += numbers[i];
+      }
+      // should return the sum when passed array of mixed strings, numbers and booleans -
+      else if (typeof numbers[i] === 'boolean') {
+        sum += Number(numbers[i]); // we convert the boolean to a number and add it to the sum
+      }
+      // should throw an error when unsupported data type (object or array) present in the array
+      else {
+        throw new Error("Unsupported data type sir or ma'am");
+      }
+    }
+    return sum;
+  };
 }
 
+  
+
+//"Unsupported data type sir or ma'am"
 const mixedArr = [6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10];
 sum([6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10]);
 console.log(sum([6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10]));
