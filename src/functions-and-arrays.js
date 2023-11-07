@@ -95,60 +95,62 @@ function sum(mixedArr) {
   {
     return 0;
   };
-  // should return the sum when passed array of numbers
-  if (mixedArr.every(element => typeof element === 'number')) {
-    // we use the sumNumbers function that we created before to calculate the sum of the array
-    return sum(mixedArr);
-  };
-  // should return the sum (of the characters) when passed array of strings
-  if (numbers.every(element => typeof element === 'string')) {
-    let sum = 0;
-    for (let i = 0; i < numbers.length; i++) {
-      // we add the length of the current element to the sum on each iteration
-      sum += numbers[i].length;
+
+  let sum = 0;
+
+  for (let i = 0; i < mixedArr.length; i++) {
+    if (typeof mixedArr[i] === 'number') {
+      sum += mixedArr[i]; // Add numbers to the sum
+    } else if (typeof mixedArr[i] === 'string') {
+      sum += mixedArr[i].length; // Add the length of strings to the sum
+    } else if (typeof mixedArr[i] === 'boolean') {
+      sum += mixedArr[i]
+    } else {
+      throw new Error("Unsupported data type sir or ma'am");
     }
-    return sum;
-  };
-  // should return the sum of the characters plus the sum of the numbers when passed array of mixed strings and numbers
-  if (
-    numbers.some(element => typeof element === 'string') // we check if there is at least one string in the array
-    && numbers.some(element => typeof element === 'number') // we check if there is at least one number in the array
-  ) {
-    let sum = 0; // we initialize the sum variable
-    for (let i = 0; i < numbers.length; i++) {
-      if (typeof numbers[i] === 'string') {
-        // we add the length of the current element to the sum on each iteration if it is a string
-        sum += numbers[i].length;
-      } else if (typeof numbers[i] === 'number') {
-        // we add the value of the current element to the sum on each iteration if it is a number
-        sum += numbers[i];
-      }
-      // should return the sum when passed array of mixed strings, numbers and booleans -
-      else if (typeof numbers[i] === 'boolean') {
-        sum += Number(numbers[i]); // we convert the boolean to a number and add it to the sum
-      }
-      // should throw an error when unsupported data type (object or array) present in the array
-      else {
-        throw new Error("Unsupported data type sir or ma'am");
-      }
-    }
-    return sum;
-  };
+  }
+
+  return sum;
+
 }
-
-  
-
-//"Unsupported data type sir or ma'am"
-const mixedArr = [6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10];
-sum([6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10]);
-console.log(sum([6, 12, 'miami', 1, true, 'barca', '200', 'lisboa', 8, 10]));
 
 
 // Iteration #4: Calculate the average
 // Level 1: Array of numbers
 const numbersAvg = [2, 6, 9, 10, 7, 4, 1, 9];
 
-function averageNumbers() {}
+function averageNumbers(numbersAvg) {
+  if (numbersAvg.length === 0) {
+    return null;
+  };
+
+  /*let sum = 0; 
+  let average = sum / numbersAvg.length
+
+  for (let i = 0; i < numbersAvg.length; i++) {
+    if (numbersAvg.length === 1) {
+      return numbersAvg[0];
+    };
+
+    for (let number of numbersAvg) {
+      sum += number;
+    }
+    
+    return average;
+  }*/
+
+  let sum = 0;
+  
+  for (let number of numbersAvg) {
+    sum += number; // Calculate the sum of the numbers
+  };
+
+  let average = sum / numbersAvg.length; 
+
+  return average;
+}
+
+
 
 // Level 2: Array of strings
 const wordsArr = [
@@ -164,10 +166,38 @@ const wordsArr = [
   "palace",
 ];
 
-function averageWordLength() {}
+function averageWordLength(wordsArr) {
+  if (wordsArr.length === 0) {
+    return null;
+  };
+
+  let sum = 0;
+  
+  
+  for (let word of wordsArr) {
+    sum += word.length; // Calculate the sum of the numbers
+  };
+
+  let average = sum / wordsArr.length; 
+
+  return average;
+}
 
 // Bonus - Iteration #4.1
-function avg() {}
+function avg(mixedEl) {
+  if (mixedEl.length === 0) {
+    return null;
+  };
+
+  let sum = 0;
+
+  for (let element of mixedEl) {
+    sum += element.length || element;
+  };  
+
+  let average = sum / mixedEl.length;
+   return average;
+}
 
 // Iteration #5: Unique arrays
 const wordsUnique = [
