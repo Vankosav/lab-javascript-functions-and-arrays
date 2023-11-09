@@ -214,7 +214,21 @@ const wordsUnique = [
   "bring",
 ];
 
-function uniquifyArray() {}
+function uniquifyArray(wordsUnique) {
+  if (wordsUnique.length === 0) {
+    return null;
+  };
+
+  let unique = [];
+
+  for ( let word of wordsUnique) {
+    if (!unique.includes(word)) {
+      console.log(unique);
+        unique.push(word);
+    }
+  }
+  return unique;
+}
 
 // Iteration #6: Find elements
 const wordsFind = [
@@ -228,7 +242,19 @@ const wordsFind = [
   "disobedience",
 ];
 
-function doesWordExist() {}
+function doesWordExist(arrayOfWords, wordToFind) {
+  if (arrayOfWords.length === 0) {
+    return null;
+  };
+  for (let word of arrayOfWords) {
+    if (word === wordToFind) {
+      return true;
+    } 
+      
+    }
+    return false;
+  }
+
 
 // Iteration #7: Count repetition
 const wordsCount = [
@@ -245,7 +271,22 @@ const wordsCount = [
   "matter",
 ];
 
-function howManyTimes() {}
+function howManyTimes(arrayOfWords, wordToSearch) {
+  if (arrayOfWords.length === 0) {
+    return 0;
+  };
+
+  let count = 0;  
+
+  for (let word of arrayOfWords) {
+    if (word === wordToSearch) {
+      count++;
+    };
+
+    }
+    return count;git 
+  }
+
 
 // Iteration #8: Bonus
 const matrix = [
