@@ -30,8 +30,7 @@ function findLongestWord(words) {
   if (words.length === 0) {
     return null;
   }
-  
-  //found an example words.length === 1 ? kako da vidim ovaj return? 
+   
   if (words.length === 1) {
     return words[0];
   }
@@ -354,7 +353,27 @@ const matrix = [
   ],
 ];
 
-function greatestProduct() {}
+function greatestProduct(matrix) {
+  let maxProduct = 0;
+
+  for (let i = 0; i < matrix.length; i++) {
+    for (let j = 0; j < matrix[i].length; j++) {
+      // Horizontal product
+      if (j + 3 < matrix[i].length) {
+        let horizProduct = matrix[i][j] * matrix[i][j + 1] * matrix[i][j + 2] * matrix[i][j + 3];
+        if (horizProduct > maxProduct) maxProduct = horizProduct;
+      }
+
+      // Vertical product
+      if (i + 3 < matrix.length) {
+        let vertProduct = matrix[i][j] * matrix[i + 1][j] * matrix[i + 2][j] * matrix[i + 3][j];
+        if (vertProduct > maxProduct) maxProduct = vertProduct;
+      }
+    }
+  }
+
+  return maxProduct;
+}
 
 // The following is required to make unit tests work.
 /* Environment setup. Do not modify the below code. */
